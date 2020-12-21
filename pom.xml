@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.github.jactor-rises</groupId>
+  <artifactId>junit-profiles</artifactId>
+  <name>junit-profiles</name>
+
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <assertj.version>3.18.1</assertj.version>
+    <junit.version>4.13.1</junit.version>
+    <junit-jupiter.version>5.7.0</junit-jupiter.version>
+    <junit-vintage.version>5.6.3</junit-vintage.version>
+
+    <!-- build -->
+    <java.version>15</java.version>
+    <maven-compiler.version>3.8.1</maven-compiler.version>
+    <maven-surefire.version>3.0.0-M4</maven-surefire.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <!-- junit -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit-jupiter.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${assertj.version}</version>
+    </dependency>
+  </dependencies>
+
+  <profiles>
+    <profile>
+      <id>default</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.junit.jupiter</groupId>
+          <artifactId>junit-jupiter-engine</artifactId>
+          <version>${junit-jupiter.version}</version>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <profile>
+      <id>vintage</id>
+      <activation>
+        <property>
+          <name>test</name>
+          <value>vintage</value>
+        </property>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.junit.vintage</groupId>
+          <artifactId>junit-vintage-engine</artifactId>
+          <version>${junit-vintage.version}</version>
+          <scope>runtime</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
+
+  <build>
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler.version}</version>
+        <configuration>
+          <release>${java.version}</release>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire.version}</version>
+      </plugin>
+
+    </plugins>
+  </build>
+</project>
