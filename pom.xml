@@ -60,10 +60,7 @@
     <profile>
       <id>vintage</id>
       <activation>
-        <property>
-          <name>test</name>
-          <value>vintage</value>
-        </property>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <dependencies>
         <dependency>
